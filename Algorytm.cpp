@@ -40,9 +40,18 @@ void solve(int D[], int n, int k) {
     
 }
 int main() {
-    int D[] = {1, 2, 3, 4, 5, 6, 7, 8};
+    ifstream file("data.txt");
+    if (!file.is_open()) {
+        cout << "Nie można otworzyć pliku" << endl;
+        return 1;
+    }
+    vector<int> D;
+    int tempValue;
+    while (file >> temp) {
+        numbers.push_back(temp);
+    }
     
-    int n = sizeof(D) / 4; 
+    int n = D.size
 
     solve(D, n, 20);
     solve(D, n, 21);
