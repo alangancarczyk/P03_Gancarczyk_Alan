@@ -4,9 +4,10 @@
 using namespace std;
 
 void solve(int D[], int n, int k,ofstream& outFile) {
-    int min_len = n + 1; 
-    int k_i = -1;
-    int k_j = -1;
+    int min_len = n + 1; //inicjalizacja minimalnej długości podtablicy spełniajacej warunek
+    int k_i = -1;   //indeksy początkowy
+    int k_j = -1;   //indeks końcowy
+    //szukanie podtablicy
     for (int i = 0; i < n; i++) {
         int sum = 0;
         for (int j = i; j < n; j++) {
@@ -23,6 +24,7 @@ void solve(int D[], int n, int k,ofstream& outFile) {
                 break; 
             } 
         }}
+        //wyswietlanie wyników na konsoli
     cout << "Wejście: ";
     for (int i = 0; i < n; i++) {
         cout << D[i] << " ";
@@ -39,6 +41,7 @@ void solve(int D[], int n, int k,ofstream& outFile) {
         cout << endl;
     }
     cout << "-------------------" << endl;
+    //zapisywanie wyników do pliku
     if (k_i == -1) {
         outFile << "-1" << endl;
     } else {
@@ -48,27 +51,33 @@ void solve(int D[], int n, int k,ofstream& outFile) {
     
 }
 int main() {
+    //Wczytywanie danych z pliku data.txt
     ifstream file("data.txt");
     if (!file.is_open()) {
         cout << "Nie można otworzyć pliku data.txt" << endl;
         return 1;
     }
+    //Tworzenie pliku wyniki.txt do zapisu wyników
     ofstream outputFile("wyniki.txt");
     if (!outputFile.is_open()) {
         cout << "Nie można utworzyć pliku wyniki.txt" << endl;
         return 1;
     }
+    //Wczytywanie danych do wektora
     vector<int> D;
     int tempValue;
     while (file >> tempValue) {
         D.push_back(tempValue);
     }
-
+    //Określenie rozmiaru tablicy
     int n = D.size();
-
+   //Sprawdzanie funkcji solve
     solve(D.data(), n, 20, outputFile);
     solve(D.data(), n, 21, outputFile);
     solve(D.data(), n, 7, outputFile);
     solve(D.data(), n, 40, outputFile);
+    //Zamknięcie plików
+    file.close();
+    outputFile.close(); 
     return 0;
 }
