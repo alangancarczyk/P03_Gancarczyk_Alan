@@ -1,7 +1,9 @@
 #include <iostream>
+#include <fstream>
+#include <vector>
 using namespace std;
 
-void solve(int D[], int n, int k) {
+void solve(int D[], int n, int k,ofstream& outFile) {
     int min_len = n + 1; 
     int k_i = -1;
     int k_j = -1;
@@ -37,25 +39,36 @@ void solve(int D[], int n, int k) {
         cout << endl;
     }
     cout << "-------------------" << endl;
+    if (k_i == -1) {
+        outFile << "-1" << endl;
+    } else {
+        for (int i = k_i; i <= k_j; i++) outFile << D[i] << " ";
+        outFile << endl;
+    }
     
 }
 int main() {
     ifstream file("data.txt");
     if (!file.is_open()) {
-        cout << "Nie można otworzyć pliku" << endl;
+        cout << "Nie można otworzyć pliku data.txt" << endl;
+        return 1;
+    }
+    ofstream outputFile("wyniki.txt");
+    if (!outputFile.is_open()) {
+        cout << "Nie można utworzyć pliku wyniki.txt" << endl;
         return 1;
     }
     vector<int> D;
     int tempValue;
-    while (file >> temp) {
-        numbers.push_back(temp);
+    while (file >> tempValue) {
+        D.push_back(tempValue);
     }
-    
-    int n = D.size
 
-    solve(D, n, 20);
-    solve(D, n, 21);
-    solve(D, n, 7);
-    solve(D, n, 40);
+    int n = D.size();
+
+    solve(D.data(), n, 20, outputFile);
+    solve(D.data(), n, 21, outputFile);
+    solve(D.data(), n, 7, outputFile);
+    solve(D.data(), n, 40, outputFile);
     return 0;
 }
